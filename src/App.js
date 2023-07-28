@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import Table from "./components/Table";
+import {useState} from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+	const [users, setUsers] = useState(() => [
+		{
+			name: 'Efdal',
+			surname: 'İnam',
+			email: 'efdalinam@gmail.com',
+			age: 26
+		},
+		{
+			name: 'Emre',
+			surname: 'İnam',
+			email: 'emreinam@gmail.com',
+			age: 33
+		},
+		{
+			name: 'Hasan',
+			surname: 'Hüseyin',
+			email: 'hsn@gmail.com',
+			age: 35
+		},
+		{
+			name: 'Kemal',
+			surname: 'Cemal',
+			email: 'onurg@gmail.com',
+			age: 26
+		}
+	])
+
+	return (
+		<div className="p-4">
+			<Table
+				searchable={true}
+				head={[
+					{name: 'Ad-Soyad', sortable: true},
+					{name: 'E-posta'},
+					{name: 'Yaş', sortable: true},
+					{name: 'İşlemler', width: 200}
+				]}
+				body={users && users.map((user, key) => ([
+					<div key={`${user.name} ${user.surname}`}>{user.name} {user.surname}</div>,
+					user.email,
+					<div searchableText={`Yaş ${user.age}`}>{user.age}</div>,
+					[
+						
+						<button className="btn btn-danger">Düzenle</button>,
+						<button onClick={() => {
+							const tmpUsers = [...users]
+							tmpUsers.splice(key, 1)
+							setUsers(tmpUsers)
+						}} className="btn btn-danger">Sil</button>
+					]
+				]))}
+			/>
+		</div>
+	);
 }
 
 export default App;
