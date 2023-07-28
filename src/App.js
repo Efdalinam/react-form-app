@@ -32,6 +32,7 @@ function App() {
 
 	return (
 		<div className="p-4">
+			
 			<Table
 				searchable={true}
 				head={[
@@ -46,12 +47,12 @@ function App() {
 					<div searchableText={`Yaş ${user.age}`}>{user.age}</div>,
 					[
 						
-						<button className="btn btn-danger">Düzenle</button>,
+						<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Düzenle</button>,
 						<button onClick={() => {
 							const tmpUsers = [...users]
 							tmpUsers.splice(key, 1)
 							setUsers(tmpUsers)
-						}} className="btn btn-danger">Sil</button>
+						}} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Sil</button>
 					]
 				]))}
 			/>
